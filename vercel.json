@@ -1,26 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "pom.xml",
-      "use": "@vercel/java"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/.*",
-      "dest": "/LinkShortenerApplication"
-    },
-    {
-      "src": "/[^/]+",
-      "dest": "/LinkShortenerApplication"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "env": {
-    "SPRING_PROFILES_ACTIVE": "production"
-  }
+  "buildCommand": "mvn clean package -DskipTests",
+  "outputDirectory": "target",
+  "framework": null,
+  "installCommand": null
 }
