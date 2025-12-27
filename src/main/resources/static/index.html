@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkShort - Smart URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="white" opacity="0.2"/>
+                    <path d="M12 20h16M20 12v16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                <h1>LinkShort</h1>
+            </div>
+            <p class="subtitle">Transform long URLs into short, trackable links</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <form id="shortenForm">
+                    <div class="form-group">
+                        <label for="urlInput">Paste your URL here:</label>
+                        <input
+                            type="url"
+                            id="urlInput"
+                            placeholder="https://example.com/your-very-long-url"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expirationInput">Expiration (hours):</label>
+                        <input
+                            type="number"
+                            id="expirationInput"
+                            min="1"
+                            max="168"
+                            value="24"
+                            placeholder="24"
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-primary">Shorten Link</button>
+                </form>
+
+                <div id="result" class="result hidden">
+                    <h3>✅ Link created successfully!</h3>
+
+                    <div class="result-content">
+                        <div class="result-left">
+                            <div class="short-link-container">
+                                <input type="text" id="shortUrl" readonly>
+                                <button id="copyBtn" class="btn-copy">📋 Copy</button>
+                            </div>
+                            <div class="link-info">
+                                <p><strong>Original URL:</strong> <span id="originalUrl"></span></p>
+                                <p><strong>Code:</strong> <span id="shortCode"></span></p>
+                                <p><strong>Expires at:</strong> <span id="expiresAt"></span></p>
+                                <p><strong>Clicks:</strong> <span id="clickCount">0</span></p>
+                            </div>
+                            <button id="statsBtn" class="btn-secondary">📊 View Stats</button>
+                        </div>
+
+                        <div class="result-right">
+                            <div class="qr-container">
+                                <div class="qr-title">QR Code</div>
+                                <div id="qrcode"></div>
+                                <button id="downloadQR" class="btn-download">⬇️ Download QR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="error" class="error hidden"></div>
+                <div id="loading" class="loading hidden">⏳ Shortening...</div>
+            </div>
+
+            <!-- Real-time Statistics -->
+            <div class="stats-container">
+                <h2 class="stats-title">System Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalLinks">0</div>
+                        <div class="stat-label">Links Created</div>
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalClicks">0</div>
+                        <div class="stat-label">Total Clicks</div>
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="activeLinks">0</div>
+                        <div class="stat-label">Active Links</div>
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with Spring Boot • Secure & Reliable</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
